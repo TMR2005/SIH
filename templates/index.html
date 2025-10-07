@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Smart Solar OPEX Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Smart Solar OPEX Dashboard</h1>
+        <h2>Industrial Real-Time Monitoring</h2>
+    </header>
+
+    <main>
+        <div class="dashboard-grid">
+            <div class="card">
+                <h3>Solar Generation</h3>
+                <p><span id="solarGen">0</span> kWh</p>
+            </div>
+
+            <div class="card">
+                <h3>Solar Efficiency</h3>
+                <p><span id="solarEff">0</span>%</p>
+            </div>
+
+            <div class="card">
+                <h3>Inverter Efficiency</h3>
+                <p><span id="inverterEff">0</span>%</p>
+            </div>
+
+            <div class="card">
+                <h3>Pump Efficiency</h3>
+                <p><span id="pumpEff">0</span>%</p>
+            </div>
+
+            <div class="card">
+                <h3>Water Pumped</h3>
+                <p><span id="flow">0</span> L/hr</p>
+            </div>
+
+            <div class="card energy-mix">
+                <h3>Energy Mix</h3>
+                <canvas id="energyMix"></canvas>
+            </div>
+
+            <div class="card environmental-impact">
+                <h3>Environmental Impact</h3>
+                <p>Cost Savings: ₹<span id="costSavings">0</span></p>
+                <p>CO₂ Avoided: <span id="co2Saved">0</span> kg</p>
+            </div>
+
+            <div class="card faulty-panels">
+                <h3>Faulty Panels</h3>
+                <p>Total Panels: <span id="totalPanels">0</span></p>
+                <p>Panels Below Range: <span id="faultyPanels" class="faulty">0</span></p>
+                <p>Locations:</p>
+                <ul id="faultyList"></ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Powered by Flask • Real-Time Monitoring System © 2025</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
