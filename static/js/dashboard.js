@@ -40,14 +40,22 @@ function fetchData() {
                 faultyList.appendChild(li);
             }
 
-            // Update chart
+            // Update energy mix chart
             energyChart.data.datasets[0].data = data.energy_mix;
             energyChart.update();
+
+            // Update line chart dynamically
+            energyLineChart.data.datasets[0].data = data.energy_line;
+            energyLineChart.update();
+
+            // Update bar chart dynamically
+            barChart.data.datasets[0].data = data.power_bar;
+            barChart.update();
         })
         .catch(err => console.error('Error fetching data:', err));
 }
 
-// Initialize Chart
+// Initialize energy mix doughnut chart
 const ctx = document.getElementById('energyMix').getContext('2d');
 const energyChart = new Chart(ctx, {
     type: 'doughnut',
@@ -67,6 +75,56 @@ const energyChart = new Chart(ctx, {
     }
 });
 
-// Fetch every 2 seconds
+// Initialize line chart (energy over time)
+const ctx1 = document.getElementById('energyChart').getContext('2d');
+const energyLineChart = new Chart(ctx1, {
+    type: 'line',
+    data: {
+        labels: ['00h', '04h', '08h', '12h', '16h', '20h', '24h'],
+        datasets: [{
+            label: 'Energy (kWh)',
+            data: [],  // start empty
+            borderColor: '#00796b',
+            backgroundColor: 'rgba(0,121,107,0.15)',
+            fill: true,
+            tension: 0.3,
+            borderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+            y: { ticks: { font: { size: 10 } } },
+            x: { ticks: { font: { size: 10 } } }
+        }
+    }
+});
+
+// Initialize bar chart (directional power distribution)
+const ctx2 = document.getElementById('barChart').getContext('2d');
+const barChart = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: ['North', 'South', 'East', 'West'],
+        datasets: [{
+            label: 'Power (kW)',
+            data: [],  // start empty
+            backgroundColor: ['#00796b', '#26a69a', '#004d40', '#009688']
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+            y: { ticks: { font: { size: 10 } } },
+            x: { ticks: { font: { size: 10 } } }
+        }
+    }
+});
+
+// Fetch data every 2 seconds and update
 setInterval(fetchData, 2000);
 fetchData();
