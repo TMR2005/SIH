@@ -1,126 +1,186 @@
-/* Reset and base */
+/* Reset basics */
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f4f7fa;
-    margin: 0;
-    padding: 20px;
-    color: #333;
-    overflow: hidden; /* prevent scroll */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f7fa;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
-    text-align: center;
-    margin-bottom: 30px;
+  background-color: #00796b;
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
 }
 
-h1 {
-    margin: 0;
-    font-size: 2.5rem;
-    color: #00796b;
+header h1 {
+  font-weight: 700;
+  font-size: 1.8rem;
 }
 
-h2 {
-    margin: 0;
-    font-weight: 400;
-    color: #555;
+header h2 {
+  font-weight: 400;
+  font-size: 1.1rem;
+  margin-top: 0.25rem;
 }
 
-/* Grid container for all cards */
+main {
+  flex-grow: 1;
+  padding: 1.5rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Grid container for cards */
 .dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-    height: 80vh; /* fixed height */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem 1.5rem; /* vertical & horizontal gap */
 }
 
-/* Card style */
+/* Card styling */
 .card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    transition: box-shadow 0.3s ease;
-}
-
-.card:hover {
-    box-shadow: 0 6px 20px rgb(0 0 0 / 0.15);
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.05);
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .card h3 {
-    margin-bottom: 12px;
-    font-weight: 600;
-    color: #004d40;
-    font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #004d40;
+  font-size: 1.15rem;
 }
 
-.card p, .card li {
-    font-size: 1.1rem;
-    margin: 4px 0;
+.card p {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  color: #004d40dd;
 }
 
 .card p span {
-    font-weight: 700;
-    font-size: 2rem;
-    color: #00796b;
+  font-weight: 700;
+  color: #00796b;
 }
 
-.faulty {
-    color: #d32f2f;
+.faulty-panels ul {
+  list-style: inside disc;
+  max-height: 80px;
+  overflow-y: auto;
+  padding-left: 0.75rem;
+  font-size: 0.9rem;
+  color: #d32f2f;
+  font-weight: 600;
 }
 
-/* Energy mix panel spans wider */
+/* Energy Mix Card - smaller pie chart */
 .energy-mix {
-    grid-column: span 2;
+  max-width: 280px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-/* Environmental impact panel spans 2 columns */
-.environmental-impact {
-    grid-column: span 2;
+.energy-mix canvas {
+  width: 180px !important;
+  height: 180px !important;
+  margin: 0 auto;
 }
 
-/* Faulty panels list */
-#faultyList {
-    list-style: none;
-    padding: 0;
-    margin-top: 5px;
+/* Environmental impact colors */
+.environmental-impact p {
+  font-size: 1rem;
+  margin: 0.3rem 0;
+  color: #00695c;
 }
 
-#faultyList li {
-    font-size: 1rem;
-    font-weight: 600;
+/* Side-by-side charts container */
+.charts-row {
+  grid-column: 1 / -1; /* span full width */
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  flex-wrap: nowrap; /* keep side by side */
+  margin-top: 1rem;
 }
 
-/* Chart canvas */
-canvas#energyMix {
-    max-width: 100%;
-    height: 180px !important;
+.chart-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.05);
+  padding: 1rem;
+  flex: 1 1 48%;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Footer */
+.chart-container h3 {
+  margin-bottom: 0.75rem;
+  font-size: 1.2rem;
+  color: #004d40;
+}
+
+.chart-container canvas {
+  width: 100% !important;
+  height: 220px !important;
+}
+
 footer {
-    text-align: center;
-    margin-top: 25px;
-    font-size: 0.9rem;
-    color: #666;
+  background-color: #004d40;
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  box-shadow: 0 -2px 5px rgb(0 0 0 / 0.1);
 }
 
-/* Responsive design */
-@media (max-width: 1100px) {
-    .dashboard-grid {
-        grid-template-columns: repeat(2, 1fr);
-        height: auto;
-    }
+/* Scrollbar styling for faulty panels */
+.faulty-panels ul::-webkit-scrollbar {
+  width: 6px;
+}
 
-    .energy-mix, .environmental-impact {
-        grid-column: span 2;
-    }
+.faulty-panels ul::-webkit-scrollbar-thumb {
+  background-color: #00796b;
+  border-radius: 3px;
+}
+
+/* Responsive: stack charts vertically and grid adapts */
+@media (max-width: 900px) {
+  .energy-mix {
+    max-width: 100%;
+  }
+  .energy-mix canvas {
+    width: 140px !important;
+    height: 140px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .charts-row {
+    flex-direction: column;
+  }
+
+  .chart-container {
+    flex: 1 1 100%;
+    min-width: auto;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
