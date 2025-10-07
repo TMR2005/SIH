@@ -9,6 +9,7 @@ function fetchData() {
             document.getElementById('pumpEff').innerText = data.pump.efficiency;
             document.getElementById('costSavings').innerText = data.impact.cost_savings;
             document.getElementById('co2Saved').innerText = data.impact.co2_saved;
+            data.pump.flow = Math.round(data.pump.flow/6);
             document.getElementById('flow').innerText = data.pump.flow;
             document.getElementById('totalPanels').innerText = data.solar.total_panels;
             document.getElementById('faultyPanels').innerText = data.solar.faulty_panels;
@@ -128,3 +129,4 @@ const barChart = new Chart(ctx2, {
 // Fetch data every 2 seconds and update
 setInterval(fetchData, 2000);
 fetchData();
+
