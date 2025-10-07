@@ -24,10 +24,16 @@ def data():
     faulty_panels = random.choice([0, 1, 2])  # simulate 0–2 faulty panels
     faulty_ids = random.sample(list(PANEL_LOCATIONS.keys()), faulty_panels)
 
-    # 🧠 Automatically populate faulty_details
+    # Auto-generate faulty panel details
     faulty_details = [{"panel_id": pid, "location": PANEL_LOCATIONS[pid]} for pid in faulty_ids]
 
-    # Simulated output
+    # Simulated line chart data (energy at 7 time intervals)
+    energy_line = [random.randint(400, 3500) for _ in range(7)]
+
+    # Simulated bar chart data (power in 4 directions)
+    power_bar = [random.randint(8, 18) for _ in range(4)]
+
+    # Complete simulated output
     output = {
         "solar": {
             "generation": round(random.uniform(200, 250), 2),
@@ -35,7 +41,7 @@ def data():
             "inverter": round(random.uniform(95, 98), 2),
             "total_panels": total_panels,
             "faulty_panels": faulty_panels,
-            "faulty_details": faulty_details  # always provided
+            "faulty_details": faulty_details
         },
         "pump": {
             "efficiency": round(random.uniform(80, 90), 2),
@@ -45,10 +51,13 @@ def data():
             "cost_savings": round(random.uniform(1100, 1300), 2),
             "co2_saved": round(random.uniform(700, 750), 1)
         },
-        "energy_mix": [random.randint(70, 90), random.randint(10, 30)]
+        "energy_mix": [random.randint(70, 90), random.randint(10, 30)],
+        "energy_line": energy_line,
+        "power_bar": power_bar
     }
 
     return jsonify(output)
+
 
 
 if __name__ == '__main__':
